@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ysyliving</artifactId>
+        <groupId>com.suron.ysyliving</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ysyliving-common</artifactId>
+    <description>公共模块</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+
+    <!--引入相关依赖-->
+    <dependencies>
+
+        <!-- 引入自定义校验器需要的依赖 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <!--
+            1. 引入nacos服务注册发现
+            2. 其它的微服务模块，只要引入了hspliving-common就有了nacos
+               服务注册/发现依赖, 不需要再引入
+            3. 这里版本老师使用了版本仲裁 2.1.0.RELEASE
+        -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--引入mysql驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
+        </dependency>
+
+        <!--引入mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!--引入lombok,简化开发-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+
+        <!--引入httpcore , hspliving-common需要的依赖-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.12</version>
+        </dependency>
+
+        <!--引入commons-lang , hspliving-common需要的依赖-->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+    </dependencies>
+
+    <!--
+          1. 这里老师想回顾使用dependencyManagement 在进行版本控制
+          2. 老韩再强调一下dependencyManagement 用于指定依赖版本,
+              但是本身并不引入相关依赖
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <!--
+                    老师解读:
+                    1. type: pom  和 scope import 配合使用
+                    2. 表示 在这个项目的子模块和当前这个模块,
+                       在引入spring-cloud-alibaba相关依赖时 锁定版本为2.1.0.RELEASE
+                    3. 通过 pom + import 解决maven单继承机制
+                 -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

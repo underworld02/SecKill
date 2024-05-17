@@ -1,0 +1,84 @@
+server:
+  port: 5050 #gateway监听端口
+
+spring:
+  cloud:
+    #配置网关
+    #http://localhost:5050/api/commodity/brand/list
+    #http://www.ysyliving.com/api/commodity/brand/list
+    gateway:
+      routes: #配置路由,可以有多个路由
+        - id: seckill_route # 路由id, 由程序员指定,保证唯一
+          uri: lb://ysyliving-seckill
+          predicates:
+            - Path=/api/seckill/**
+          filters:
+            # 也就是通过路径重写 最终的url 就是 http://localhost:7070/oss/policy
+            - RewritePath=/api/seckill/(?<segment>.*), /$\{segment}
+        - id: ysyliving_service_route # 路由id, 由程序员指定,保证唯一
+          #当前配置完成的需求
+          #老师说明: 因为 api/service/ 是一个更加精确的路径, 必须将 这组路由放在 /api 这个路由前
+          #否则会报错, 会可以看看细节.
+          # http://localhost:5050/api/service/oss/policy
+          #如果到网关的请求是 http://localhost:5050/api/service/??/??/?? ,gateway通过断言
+          #最终将请求路由转发到 http://ysyliving-service[注册到nacos的ysyliving-service服务ip+端口]/??/??/?? => url=uri+Path
+          #因为我们要去掉断言到的 Path的 /api/service ,所以老师会使用路径重写
+          uri: lb://ysyliving-service
+          predicates:
+            - Path=/api/service/**
+          filters:
+            # 也就是通过路径重写 最终的url 就是 http://localhost:7070/oss/policy
+            - RewritePath=/api/service/(?<segment>.*), /$\{segment}
+        - id: ysyliving_commodity_route # 路由id, 由程序员指定,保证唯一
+          #当前配置完成的需求
+          #老师说明: 因为 api/commodity/ 是一个更加精确的路径, 必须将 这组路由放在 /api 这个路由前
+          #否则会报错, 会可以看看细节.
+          # http://localhost:5050/api/commodity/category/list/tree
+          #如果到网关的请求是 http://localhost:5050/api/commodity/??/??/?? ,gateway通过断言
+          #最终将请求路由转发到 http://ysyliving-commodity[注册到nacos的ysyliving-commodity服务ip+端口]/??/??/?? => url=uri+Path
+          #因为我们要去掉断言到的 Path的 /api ,所以老师会使用路径重写
+
+          #分析 属性分组的请求
+          #http://localhost:5050/api/commodity/attrgroup/list
+          #把请求路由转发到
+          # http://localhost:9090/commodity/attrgroup/list
+          uri: lb://ysyliving-commodity
+          predicates:
+            - Path=/api/commodity/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: ysyliving_renren_fast_route # 路由id, 由程序员指定,保证唯一
+          #当前配置完成的需求
+          #如果到网关的请求是 http://localhost:5050/api/??/??/?? ,gateway通过断言
+          #最终将请求路由转发到 http://renren-fast[注册到nacos的renren-fast服务ip+端口]/renren-fast/??/??/?? => url=uri+Path
+          #因为我们要去掉断言到的 Path的 /api ,所以老师会使用路径重写
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            # - RewritePath=/red(?<segment>/?.*), $\{segment}
+            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+#        - id: test_route01 # 路由id, 由程序员指定,保证唯一
+#          #当前配置完成的需求
+#          #如果到网关的请求是 http://localhost:5050/commodity/brand/list ,gateway通过断言
+#          #最终将请求路由转发到 http://localhost:9090/commodity/brand/list => url=uri+Path
+#          uri: http://localhost:9090
+#          predicates:
+#            - Path=/commodity/brand/list
+#        - id: test_route02 # 路由id, 由程序员指定,保证唯一
+#          #当前配置完成的需求
+#          #如果到网关的请求是 http://localhost:5050/guoji ,gateway通过断言
+#          #最终将请求路由转发到 http://news.baidu.com/guoji => url=uri+Path
+#          uri: http://news.baidu.com
+#          predicates:
+#            - Path=/guoji
+        # for nginx 增加一组路由
+        - id: ysyliving_host_route
+          uri: lb://ysyliving-commodity
+          predicates:
+            - Host=**.suron.com.cn
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #配置nacos地址
+  application:
+    name: ysyliving-gateway

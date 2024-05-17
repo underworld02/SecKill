@@ -1,0 +1,103 @@
+
+spring:
+  thymeleaf:
+    #关闭缓存
+    cache: false
+  datasource:
+    url: jdbc:mysql://49.235.172.87:3306/seckill?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ysy123123
+    # 数据库连接池
+    hikari:
+      #连接池名
+      pool-name: Ysy_Hikari_Poll
+      #最小空闲连接
+      minimum-idle: 5
+      #空闲连接存活最大时间，默认60000(10分钟)
+      idle-timeout: 60000
+      # 最大连接数，默认是10
+      maximum-pool-size: 10
+      #从连接池返回来的连接自动提交
+      auto-commit: true
+      #连接最大存活时间。0表示永久存活，默认180000（30分钟）
+      max-lifetime: 180000
+      #连接超时时间，默认30000（30秒）
+      connection-timeout: 30000
+      #测试连接是否可用的查询语句
+      connection-test-query: select 1
+
+  cloud:
+    alicloud:
+      oss:
+        endpoint: oss-cn-shanghai.aliyuncs.com
+      access-key: LTAI5tGJ1c8hnwwkSWmNcWdt
+      secret-key: hS72N9CjrxZCI6SzRYCIdeUYFZSpyH
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #配置nacos的地址ip加端口
+  application:
+    name: ysyliving-seckill
+
+  #配置Redis
+  redis:
+    host: 49.235.172.87
+    port: 6379
+    password: Ysy123123
+    database: 0
+    timeout: 10000ms
+    lettuce:
+      pool:
+        #最大连接数,默认是8
+        max-active: 8
+        #最大连接等待/阻塞时间,默认-1
+        max-wait: 10000ms
+        #最大空闲连接
+        max-idle: 200
+        #最小空闲连接，默认0
+        min-idle: 5
+  rabbitmq:
+    #rabbitmq的ip
+    host: 49.235.172.87
+    username: guest
+    password: guest
+    #虚拟主机
+    virtual-host: /
+    #端口
+    port: 5672
+    listener:
+      simple:
+        #消费者的最小数量
+        concurrency: 10
+        #消费者的最大数量
+        max-concurrency: 10
+        #限制消费者,每次只能处理一条消息,处理完才能继续下一条消息
+        prefetch: 1
+        #启动时，是否默认启动容器,默认true
+        auto-startup: true
+        #被拒绝后，重新进入队列
+        default-requeue-rejected: true
+    template:
+      retry:
+        #启用重试机制,默认false
+        enabled: true
+        #设置初始化的重试时间间隔
+        initial-interval: 1000ms
+        #重试最大次数,默认是3
+        max-attempts: 3
+        #重试最大时间间隔，默认是10s
+        max-interval: 10000ms
+        #重试时间间隔的乘数
+        #比如配置是2 ：第1次等 1s, 第2次等 2s,第3次等 4s..
+        #比如配置是1 ：第1次等 1s, 第2次等 1s,第3次等 1s..
+        multiplier: 1
+#mybatis-plus配置
+mybatis-plus:
+  #配置mapper.xml映射文件
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  #配置mybatis数据返回类型别名
+  type-aliases-package: com.suron.ysyliving.seckill.pojo
+#mybatis sql 打印
+#logging:
+#  level:
+#    com.suron.seckill.mapper: debug
