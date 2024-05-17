@@ -2,14 +2,14 @@ spring:
   datasource:
     username: root
     password: ysy123123
-    url: jdbc:mysql://49.235.172.87:3306/commodity?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://14.235.172.71:3306/commodity?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     alicloud:
       oss:
         endpoint: oss-cn-shanghai.aliyuncs.com
-      access-key: LTAI5tGJ1c8hnwwkSWmNcWdt
-      secret-key: hS72N9CjrxZCI6SzRYCIdeUYFZSpyH
+      access-key: LTAI5tGJ1c8hnwwXXX
+      secret-key: hS72N9CjrxZCI6SzRXXXX
 
     nacos:
       discovery:
