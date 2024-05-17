@@ -6,8 +6,8 @@ spring:
   cloud:
     #配置OSS
     alicloud:
-      access-key: LTAI5tGJ1c8hnwwkSWmNcWdt
-      secret-key: hS72N9CjrxZCI6SzRYCIdeUYFZSpyH
+      access-key: LTAI5tGJ1c8hnwwkXXXX
+      secret-key: hS72N9CjrxZCI6SzRYCIdeXXXXX
       oss:
         endpoint: oss-cn-shanghai.aliyuncs.com
         bucket: seckill-bucket
