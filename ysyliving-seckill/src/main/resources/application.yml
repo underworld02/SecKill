@@ -4,7 +4,7 @@ spring:
     #关闭缓存
     cache: false
   datasource:
-    url: jdbc:mysql://49.235.172.87:3306/seckill?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://14.225.172.71:3306/seckill?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ysy123123
@@ -31,8 +31,8 @@ spring:
     alicloud:
       oss:
         endpoint: oss-cn-shanghai.aliyuncs.com
-      access-key: LTAI5tGJ1c8hnwwkSWmNcWdt
-      secret-key: hS72N9CjrxZCI6SzRYCIdeUYFZSpyH
+      access-key: LTAI5tGJ1c8hnwwkSXXX
+      secret-key: hS72N9CjrxZCI6SzRYCIdeXXX
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 #配置nacos的地址ip加端口
