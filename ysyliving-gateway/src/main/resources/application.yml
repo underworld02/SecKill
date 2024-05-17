@@ -76,7 +76,7 @@ spring:
         - id: ysyliving_host_route
           uri: lb://ysyliving-commodity
           predicates:
-            - Host=**.suron.com.cn
+            - Host=**.suzon.cn
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 #配置nacos地址
