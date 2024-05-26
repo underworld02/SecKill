@@ -2,7 +2,7 @@
 
 #### 介绍
 suron-高并发秒杀系统
-网址：[http://www.suron.com.cn](http://www.suron.com.cn) (备案中)
+网址：[http://www.suron.com.cn](http://www.suron.com.cn)
 
 #### 软件架构
 软件架构说明
