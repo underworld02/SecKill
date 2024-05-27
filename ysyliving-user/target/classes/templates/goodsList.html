@@ -1,0 +1,156 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品列表</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/api/seckill/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/api/seckill/js/jquery.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/api/seckill/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/api/seckill/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/api/seckill/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/api/seckill/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/api/seckill/js/common.js}"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+        }
+
+        body {
+            background: #c9302c;
+        }
+
+        .main-header {
+            width: 100%;
+            height: 100px;
+            background: whitesmoke;
+            display: block;
+        }
+
+        .navbar {
+            display: inline-block;
+            float: right;
+            margin-right: 50px;
+            margin-top: 30px;
+        }
+
+        .logo {
+            display: inline-block;
+            margin-top: 30px;
+            margin-left: 30px;
+            text-decoration: none;
+        }
+
+        .logo-lg {
+            font-size: 20px;
+            font-weight: lighter;
+            color: #232324;
+        }
+
+        .logo-lg > b {
+            font-size: 20px;
+            font-weight: lighter;
+            color: #232324;
+        }
+
+        .container {
+            background: #FFFFFF;
+        }
+
+        .add-good {
+            padding-top: 12px;
+            padding-bottom: 20px;
+            border-radius: 10px;
+            outline: none;
+            display: block;
+            margin-right: 30px;
+            background: #f6f6f6;
+            color: #ce7d88;
+            border: solid 1px #eac7cc;
+        }
+    </style>
+</head>
+<body>
+
+
+<!--抽取头部公共页面-->
+<header id="site-header" class="main-header">
+    <!-- Logo -->
+    <a class="logo" th:href="@{/api/seckill/goods/toList}">
+        <span class="logo-lg"><b>商品抢购</b></span></a>
+
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="user-image" src="/api/seckill/imgs/user.png" height="42" alt="User Image">
+                        <span class="hidden-xs"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img class="img-circle" alt="User Image">
+                            <p>
+                                Hello ABC - Hello ABC
+                                <small>Hello ABC</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-middle">
+                                <a th:href="@{/api/seckill/login/out}" class="btn btn-lg btn-default btn-block">退出系统</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="panel-heading">秒杀商品列表</div>
+
+    <table class="table" id="goodslist">
+        <tr>
+            <td>名称</td>
+            <td>图片</td>
+            <td>原价</td>
+            <td>秒杀价</td>
+            <td>库存</td>
+            <td>详情</td>
+        </tr>
+        <tr th:each="goods,goodstStat : ${goodsList}">
+            <td th:text="${goods.goodsName}"></td>
+            <td><img th:src="@{${goods.goodsImg}}" width="100" height="100"/>
+            </td>
+            <td th:text="${goods.goodsPrice}"></td>
+            <td th:text="${goods.seckillPrice}"></td>
+            <td th:text="${goods.stockCount}"></td>
+            <td><a th:href="'/api/seckill/goods/toDetail/'+${goods.id}">查看详情</a></td>
+        </tr>
+    </table>
+</div>
+<script>
+</script>

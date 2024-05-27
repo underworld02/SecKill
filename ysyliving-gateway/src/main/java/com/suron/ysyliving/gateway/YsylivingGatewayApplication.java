@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+import java.time.Instant;
+
 /**
  * @author ysy
  * @version 1.0
@@ -15,3 +17,4 @@ public class YsylivingGatewayApplication {
         SpringApplication.run(YsylivingGatewayApplication.class, args);
     }
 }
+

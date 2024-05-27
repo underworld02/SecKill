@@ -27,6 +27,8 @@
         <module>ysyliving-common</module>
         <module>ysyliving-service</module>
         <module>ysyliving-gateway</module>
+        <module>ysyliving-user</module>
+        <module>ysyliving-goods</module>
     </modules>
 
 </project>
