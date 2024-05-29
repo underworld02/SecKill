@@ -1,0 +1,176 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>订单详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--jquery-->
+    <script type="text/javascript" th:src="@{/api/seckill/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/api/seckill/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/api/seckill/bootstrap/js/bootstrap.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/api/seckill/layer/layer.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/api/seckill/js/common.js}"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+        }
+
+        body {
+            background: #c9302c;
+        }
+
+        .main-header {
+            width: 100%;
+            height: 100px;
+            background: whitesmoke;
+            display: block;
+        }
+
+        .navbar {
+            display: inline-block;
+            float: right;
+            margin-right: 50px;
+            margin-top: 30px;
+        }
+
+        .logo {
+            display: inline-block;
+            margin-top: 30px;
+            margin-left: 30px;
+            text-decoration: none;
+        }
+
+        .logo-lg {
+            font-size: 20px;
+            font-weight: lighter;
+            color: #232324;
+        }
+
+        .logo-lg > b {
+            font-size: 20px;
+            font-weight: lighter;
+            color: #232324;
+        }
+
+        .container {
+            background: #FFFFFF;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            width: 750px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header id="site-header" class="main-header">
+    <!-- Logo -->
+    <a class="logo" onclick="toList()">
+        <span class="logo-lg"><b>商品抢购</b></span>
+    </a>
+
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="user-image" src="/api/seckill/imgs/user.png" height="32" alt="User Image">
+                        <span class="hidden-xs"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img class="img-circle" alt="User Image">
+                            <p>
+                                Hello ABC - Hello ABC
+                                <small>Hello ABC</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-middle">
+                                <a onclick="toList()" class="btn btn-lg btn-default btn-block">退出系统</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background: #c9302c;color: white">秒杀订单详情</div>
+    <div class="container">
+        <table class="table" id="order">
+            <tr>
+                <td>名称</td>
+                <td id="goodName" colspan="3" th:text="${goods.goodsName}"></td>
+            </tr>
+            <tr>
+                <td>图片</td>
+                <td colspan="2"><img id="goodImg" width="200" th:src="@{${goods.goodsImg}}"
+                                     height="200"/></td>
+            </tr>
+            <tr>
+                <td>订单价格</td>
+                <td colspan="2" id="goodPrice" th:text="${order.goodsPrice}"></td>
+            </tr>
+            <tr>
+                <td>下单时间</td>
+                <td id="createDate" colspan="2" th:text="${#dates.format(order.createDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            <tr>
+                <td>订单状态</td>
+                <td id="status" >
+                    <span th:if="${order.status eq 0}">未支付</span>
+                    <span th:if="${order.status eq 1}">代发货</span>
+                    <span th:if="${order.status eq 2}">已发货</span>
+                    <span th:if="${order.status eq 3}">已收货</span>
+                    <span th:if="${order.status eq 4}">已退款</span>
+                    <span th:if="${order.status eq 5}">已完成</span>
+
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-block" type="submit"
+                            id="payButton">立即支付
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>收货人</td>
+                <td colspan="2">XXX 13300000000</td>
+            </tr>
+            <tr>
+                <td>收货地址</td>
+                <td colspan="2">北京市幸福小区6单元101号</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+</script>
+</body>
+</html>

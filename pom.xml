@@ -29,6 +29,7 @@
         <module>ysyliving-gateway</module>
         <module>ysyliving-user</module>
         <module>ysyliving-goods</module>
+        <module>ysyliving-seata</module>
     </modules>
 
 </project>

@@ -14,6 +14,18 @@
   ],
   "properties": [
     {
+      "name": "rate-limiter.default-config.max-visits",
+      "type": "java.lang.Integer",
+      "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig$LimitConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "rate-limiter.default-config.seconds",
+      "type": "java.lang.Long",
+      "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig$LimitConfig",
+      "defaultValue": 0
+    },
+    {
       "name": "rate-limiter.routes",
       "type": "java.util.Map<java.lang.String,com.suron.ysyliving.gateway.config.RateLimiterConfig$LimitConfig>",
       "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig"
