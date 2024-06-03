@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "rate-limiter",
+      "type": "com.suron.ysyliving.gateway.config.RateLimiterConfig",
+      "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig"
+    },
+    {
+      "name": "rate-limiter.default-config",
+      "type": "com.suron.ysyliving.gateway.config.RateLimiterConfig$LimitConfig",
+      "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig",
+      "sourceMethod": "getDefaultConfig()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rate-limiter.routes",
+      "type": "java.util.Map<java.lang.String,com.suron.ysyliving.gateway.config.RateLimiterConfig$LimitConfig>",
+      "sourceType": "com.suron.ysyliving.gateway.config.RateLimiterConfig"
+    }
+  ],
+  "hints": []
+}
