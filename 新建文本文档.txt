@@ -1,0 +1,19 @@
+\begin{equation}
+    \label{eq:loss_ce}
+    \mathcal{L}_{\mathrm{CE}} 
+    = - \log \frac{\exp(f_i^\top \mathbf{c}_{y_i})}
+         {\sum_{k=1}^N \exp(f_i^\top \mathbf{c}_k)}
+\end{equation}
+\noindent 其中，$\mathbf{f}_i \in \mathbb{R}^d$ 表示第 $i$ 个样本的视觉特征向量，$y_i$ 为基于聚类得到的伪标签，$\mathbf{c}_k \in \mathbb{R}^d$ 为存储在内存字典中的第 $k$ 个聚类质心向量，$N$ 为中心向量的总数。
+
+在反向传播时，为了使中心向量 $\mathbf{c}_j$ 更准确地代表该身份，在同一批次内选取与当前中心点积最小的特征进行动量更新：
+\begin{equation}
+    \label{eq:center_update}
+    \mathbf{c}_k \leftarrow
+    m\cdot\mathbf{c}_k 
+    \;+\; (1 - m)\cdot f_{\mathrm{hard}},
+    \quad
+    \mathbf{c}_k \leftarrow
+    \frac{\mathbf{c}_k}{\|\mathbf{c}_k\|}
+\end{equation}
+其中 $m \in [0,1]$ 为动量系数(momentum)，$f_{\mathrm{hard}}$ 为在当前批次内与 $\mathbf{c}_k$ 点积最小的特征向量，归一化操作确保中心向量的范数稳定。
